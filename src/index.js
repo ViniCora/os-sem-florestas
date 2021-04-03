@@ -9,6 +9,8 @@ import Violetta from './PersonagensPaginas/Violetta';
 import Aaron from './PersonagensPaginas/Aaron';
 import Ewan from './PersonagensPaginas/Ewan';
 import Danyel from './PersonagensPaginas/Danyel';
+import MorganaHela from './PersonagensPaginas/MorganaHela';
+import Ibrahim from './PersonagensPaginas/Ibrahim';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -20,6 +22,8 @@ ReactDOM.render(
     <Route path="/personagens/Aaron" component={Aaron} />
     <Route path="/personagens/Ewan" component={Ewan} />
     <Route path="/personagens/Danyel" component={Danyel} />
+    <Route path="/personagens/Ibrahim" component={Ibrahim} />
+    <Route path="/personagens/MorganaHela" component={MorganaHela} />
   </Switch>
 </BrowserRouter>,
   document.getElementById('root')

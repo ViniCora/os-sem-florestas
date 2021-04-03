@@ -7,6 +7,8 @@ import Violetta from '../Personagens/Violetta.png'
 import Aaron from '../Personagens/AaronBaudelaire.png'
 import Ewan from '../Personagens/Ewan.png'
 import Danyel from '../Personagens/Danyel.png';
+import Morgana from '../Personagens/MorganaHela.png';
+import Ibrahim from '../Personagens/Ibrahim.png';
 import AtributesDataService from '../Services/AtributesService.js';
 
 function Personagem({Nome}){
@@ -44,7 +46,10 @@ function Personagem({Nome}){
                             Nome === "Violetta" ? Violetta : 
                             Nome === "Aalik Mattaaq" ? AalikMattaaq :
                             Nome === "Danyel de Lucca" ? Danyel :
-                            Nome === "Ewan Butcher" ? Ewan : Aaron
+                            Nome === "Ewan Butcher" ? Ewan : 
+                            Nome === "Aaron Baudelaire" ? Aaron :
+                            Nome === "Morgana Hela" ? Morgana :
+                            Ibrahim
                         } alt={Nome} />
                         
                         <div style={{display: 'flex', flexDirection: 'column'}}>
