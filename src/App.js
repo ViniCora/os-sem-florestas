@@ -40,7 +40,7 @@ function App() {
               return (
                 <div style={{paddingLeft:"40px"}}>
                   <Link to={`/personagens/${player.name.replace(/\s/g, '')}`}>
-                    <img style={{width: '220px', height: '240px',paddingLeft: '0px'}} src={`http://localhost:8080/${player.imagePath}`} alt={player.name} />
+                    <img style={{width: '220px', height: '240px',paddingLeft: '0px'}} src={`https://os-sem-floresta-api.herokuapp.com/${player.imagePath}`} alt={player.name} />
                   </Link>
               </div>
               );
