@@ -4,8 +4,24 @@ const getAtributes = (name) => {
     return http.get(`/atributes?name=${name}`);
 };
 
+const getPlayers = () => {
+    return http.get(`/players`);
+};
+
+const getPlayerImage = (fileName) => {
+    return http.get(`/uploads/${fileName}`);
+};
+
+const createPlayer = (data) => {
+    return http.post(`/players`, data);
+}
+
 const updateVida = (id, data) => {
     return http.put(`/atributes/vida/${id}`, data);
+}
+
+const updateMostrarTela = (id, data) => {
+    return http.put(`/atributes/mostrarTela/${id}`, data);
 }
 
 const updateForca = (id, data) => {
@@ -40,4 +56,4 @@ const updatePercepcao = (id, data) => {
     return http.put(`/atributes/percepcao/${id}`, data);
 }
 
-export default { getAtributes, updateVida, updateForca, updateDestreza, updateCarisma, updateInteligencia, updateResistencia, updateMira, updateOficio, updatePercepcao};
+export default { getAtributes, getPlayers, getPlayerImage, createPlayer, updateVida, updateMostrarTela, updateForca, updateDestreza, updateCarisma, updateInteligencia, updateResistencia, updateMira, updateOficio, updatePercepcao};

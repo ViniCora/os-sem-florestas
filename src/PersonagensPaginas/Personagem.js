@@ -1,28 +1,24 @@
 import React, {useState, useEffect} from 'react';
 import Atributos from '../Atributos/Atributos';
 import Header from '../Header/Header';
-import LuisGarcia from '../Personagens/LuisGarcia.jpg'
-import AalikMattaaq from '../Personagens/AalikMattaaq.png'
-import Violetta from '../Personagens/Violetta.png'
-import Aaron from '../Personagens/AaronBaudelaire.png'
-import Ewan from '../Personagens/Ewan.png'
-import Danyel from '../Personagens/Danyel.png';
-import Morgana from '../Personagens/MorganaHela.png';
-import Ibrahim from '../Personagens/Ibrahim.png';
 import AtributesDataService from '../Services/AtributesService.js';
+import Interrogação from '../Personagens/interrogação.jpg'
 
 function Personagem({Nome}){
 
     const [atributes, setAtributes] = useState(null);
+    const [mostrarTela, setMostrarTela] = useState(false);
     
     useEffect(() => {
         retrieveAtributes();
       }, []);
 
+
     const retrieveAtributes = () => {
         AtributesDataService.getAtributes(Nome)
         .then((response) => {
         setAtributes(response.data[0]);
+        setMostrarTela(response.data[0].mostrar_tela);
         })
         .catch((e) => {
         console.log(e);
@@ -41,16 +37,8 @@ function Personagem({Nome}){
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', borderColor: '#fff', borderRadius: '8px', borderStyle: 'solid', borderWidth: '2px',
                 paddingLeft: '10px', paddingRight: '10px', marginTop: '20px', marginBottom: '50px', backgroundColor: '#696969'}}>  
                         
-                        <img style={{maxWidth: '200px', paddingLeft: '0px', paddingTop: '50px', paddingBottom: '50px'}} src={
-                            Nome === "Luis Garcia Do Nascimento" ? LuisGarcia :
-                            Nome === "Violetta" ? Violetta : 
-                            Nome === "Aalik Mattaaq" ? AalikMattaaq :
-                            Nome === "Danyel de Lucca" ? Danyel :
-                            Nome === "Ewan Butcher" ? Ewan : 
-                            Nome === "Aaron Baudelaire" ? Aaron :
-                            Nome === "Morgana Hela" ? Morgana :
-                            Ibrahim
-                        } alt={Nome} />
+                        <img style={{maxWidth: '200px', paddingLeft: '0px', paddingTop: '50px', paddingBottom: '50px'}} src={`http://localhost:8080/${atributes.imagePath}`} 
+                        alt={Nome} />
                         
                         <div style={{display: 'flex', flexDirection: 'column'}}>
                             <h1 style={{paddingLeft: '20px', paddingTop: '50px', margin: '0px'}}>{Nome}</h1>
@@ -60,6 +48,36 @@ function Personagem({Nome}){
                             <h2 style={{paddingLeft: '20px', paddingTop: '10px', margin: '0px', paddingBottom: '40px'}}>{`Cargo da base: ${atributes.oficio_base}`}</h2>
                         </div>
                     </div>
+
+                    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', paddingBottom:'20px'}}>
+                    <label style={{fontSize: '30px', paddingRight:'10px', color: '#fff'}}>Mostrar na tela inicial?</label>
+                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', paddingBottom: '10px', paddingTop: '20px'}}>
+                        <label style={{fontSize: '30px', paddingRight:'10px', color: '#fff'}}>Não</label>
+                        <label class="switch"> 
+                            <input type="checkbox" checked={mostrarTela ? true : false} onClick={()=>{
+                                var valueMostrar = false;
+                                if(mostrarTela){
+                                    valueMostrar = false;
+                                    setMostrarTela(false)
+                                }else{
+                                    valueMostrar = true;
+                                    setMostrarTela(true);
+                                }
+
+                                AtributesDataService.updateMostrarTela(atributes._id, {value: valueMostrar})
+                                .then((response) => {
+                                    console.log("Mostrar na tela inicial alterado com sucesso");
+                                })
+                                .catch((e) => {
+                                console.log(e);
+                                });
+                            }} />
+                            <span class="slider round"></span>
+                        </label>
+                        <label style={{fontSize: '30px', paddingLeft:'10px', color: '#fff'}}>Sim</label>
+                    </div>
+                    </div>
+
                     <Atributos id={atributes._id} Força={atributes.força} Destreza={atributes.destreza} Carisma={atributes.carisma} Inteligencia={atributes.inteligencia} 
                         Resistencia={atributes.resistencia} Mira={atributes.mira} Oficio={atributes.oficio} Percepcao={atributes.percepcao} Vida={atributes.vida}></Atributos>
                 </div>

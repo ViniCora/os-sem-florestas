@@ -75,8 +75,8 @@ function CardAtributos({Atributo, Banco, Value, id}){
                                             rollSemMod === 1 ? 'Falha Crítica, rodou: ' + roll :  
                                             rollSemMod === 100 ? 'Sucesso Crítico, rodou: ' + roll :
                                             (valorGarantido <= 0) ? 'Ação Impossivel!' :
-                                            (roll >= 1 && roll < valorMinimo) ? 'Falhou, rodou: ' + roll + (modifier != 0 ? ` (${rollSemMod} com modifier de: ${modifier})` : '') +  '.' :
-                                            (roll < 100 && roll > valorMinimo && valorGarantido < 100) ? 'Sucesso, rodou: ' + roll + (modifier != 0 ? ` (${rollSemMod} com modifier de: ${modifier})` : '') +'.' : 
+                                            (roll >= 1 && roll < valorMinimo) ? 'Falhou, rodou: ' + roll + (modifier !== 0 ? ` (${rollSemMod} com modifier de: ${modifier})` : '') +  '.' :
+                                            (roll < 100 && roll > valorMinimo && valorGarantido < 100) ? 'Sucesso, rodou: ' + roll + (modifier !== 0 ? ` (${rollSemMod} com modifier de: ${modifier})` : '') +'.' : 
                                             valorGarantido >= 100 ? 'Ação garantida!' : ''
                                         }</h2>
                                         { (roll <= 0 || roll >= 100 || valorGarantido <= 0) ? '' : 
@@ -138,7 +138,6 @@ function CardAtributos({Atributo, Banco, Value, id}){
                                             var cont = Math.ceil((valor * newRoll)/100);
                                             console.log(cont);
                                             setContestacao(cont);
-                                            const valorgarantido= valor + parseInt(mod);
                                             setValorGarantido(valor + parseInt(mod));
                                             setHasRoll(true);
                                         }
@@ -157,8 +156,8 @@ function CardAtributos({Atributo, Banco, Value, id}){
                          Atributo === 'Resistência' ? resistenciaImg : 
                          Atributo === 'Mira' ? miraImg : 
                          Atributo === 'Ofício' ? oficioImg : 
-                         Atributo == 'Percepção' ? percepcaoImg : 
-                         Atributo == 'Vida' ? vidaImg : iniciativaImg} alt="Força" />
+                         Atributo === 'Percepção' ? percepcaoImg : 
+                         Atributo === 'Vida' ? vidaImg : iniciativaImg} alt="Força" />
                 </div>
                 {
                     isEditar ? 
@@ -178,8 +177,8 @@ function CardAtributos({Atributo, Banco, Value, id}){
                             
                         </div>
                     : 
-                        <label style={{fontSize: '30px', paddingLeft:'10px'}}>{Atributo == 'Iniciativa' ? `Iniciativa` : `${Atributo}:`} { 
-                        Atributo == 'Iniciativa' ? '' : valor}</label>
+                        <label style={{fontSize: '30px', paddingLeft:'10px'}}>{Atributo === 'Iniciativa' ? `Iniciativa` : `${Atributo}:`} { 
+                        Atributo === 'Iniciativa' ? '' : valor}</label>
                 }
             </div>
             <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
